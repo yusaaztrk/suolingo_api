@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Rails 8 yerine en guncel ve stabil 7.x surumu
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 8.1.1"
 
 # Windows'ta sorunsuz calisan veritabani surucusu
 gem "sqlite3", "~> 1.7"
