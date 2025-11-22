@@ -1,0 +1,17 @@
+// Suolingo Database Schema - Rails 8 API
+
+[User|id;email;password_digest;role]
+[Profile|id;full_name;level;xp_points;avatar_url]
+[LanguageCourse|id;name;target_language;difficulty_level;icon_url]
+[Unit|id;title;description;order_index]
+[Lesson|id;title;content_type;media_url]
+[Exercise|id;question;correct_answer;audio_url;points]
+[UserProgress|id;is_completed;score]
+
+// İlişkiler
+[User]1-1[Profile]
+[LanguageCourse]1-n[Unit]
+[Unit]1-n[Lesson]
+[Lesson]1-n[Exercise]
+[User]1-n[UserProgress]
+[Lesson]1-n[UserProgress]
