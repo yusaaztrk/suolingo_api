@@ -1,0 +1,159 @@
+openapi: 3.0.1
+info:
+  title: Suolingo AI Core API
+  description: "Backend API for Suolingo Next-Gen Language Learning Platform. Features real-time Avatar Interaction, STT/TTS Engine, and Gamification System."
+  version: v2.1.0
+servers:
+  - url: http://localhost:3000
+    description: Production Server
+components:
+  schemas:
+    Avatar:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+          example: "Prof. Dr."
+        name:
+          type: string
+          example: "Ahmet Yılmaz"
+        specialty:
+          type: string
+          example: "Linguistics & Grammar"
+        idle_video_url:
+          type: string
+          example: "http://cdn.suolingo.com/avatars/ahmet_idle.mp4"
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "tech_guru"
+        level:
+          type: string
+          example: "C1 - Advanced"
+        streak:
+          type: integer
+          example: 45
+    Quest:
+      type: object
+      properties:
+        task:
+          type: string
+        completed:
+          type: boolean
+
+paths:
+  /avatars:
+    get:
+      summary: "Fetch AI Tutors"
+      description: "Returns a list of available AI avatars with their video loop URLs."
+      tags: [AI Simulation]
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Avatar'
+
+  /api/v1/speak:
+    post:
+      summary: "Text-to-Speech Interaction (TTS Engine)"
+      description: "Processes user text input and returns synthesized voice audio URL with animation triggers."
+      tags: [Real-time Interaction]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: "Can you explain the Present Perfect Tense?"
+                avatar_id:
+                  type: integer
+      responses:
+        '200':
+          description: "Audio and Animation Data"
+
+  /api/v1/check_pronunciation:
+    post:
+      summary: "Speech-to-Text Analysis (STT Engine)"
+      description: "Analyzes user audio input for pronunciation accuracy and fluency."
+      tags: [Real-time Interaction]
+      responses:
+        '200':
+          description: "Score Analysis"
+
+  /api/v1/history:
+    get:
+      summary: "Session History"
+      description: "Retrieves past conversation logs for the current active session."
+      tags: [User Data]
+      parameters:
+        - name: avatar_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Message Logs"
+
+  /api/v1/profile:
+    get:
+      summary: "Get User Gamification Stats"
+      description: "Returns XP, current streak, and language level."
+      tags: [Gamification]
+      responses:
+        '200':
+          description: "User Profile Data"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+
+  /api/v1/leaderboard:
+    get:
+      summary: "Global Leaderboard"
+      description: "Returns top ranking users for the current league."
+      tags: [Gamification]
+      responses:
+        '200':
+          description: "Rankings"
+
+  /api/v1/daily_quests:
+    get:
+      summary: "Daily Learning Quests"
+      tags: [Gamification]
+      responses:
+        '200':
+          description: "List of active tasks"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quest'
+
+  /api/v1/save_word:
+    post:
+      summary: "Add to Vocabulary Bank"
+      tags: [User Data]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                word:
+                  type: string
+                  example: "Ephemeral"
+      responses:
+        '200':
+          description: "Saved successfully"

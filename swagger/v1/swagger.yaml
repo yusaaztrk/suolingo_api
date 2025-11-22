@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Suolingo API
+  description: Dil öğrenme platformu için geliştirilmiş RESTful API dokümantasyonu. Rails 7.2 ile güçlendirilmiştir.
+  version: v1
+servers:
+  - url: http://localhost:3000
+    description: Local Development Server
+components:
+  schemas:
+    LanguageCourse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "İngilizce A1"
+        target_language:
+          type: string
+          example: "English"
+        difficulty_level:
+          type: string
+          example: "Beginner"
+    Unit:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Tanışma Faslı"
+        description:
+          type: string
+        language_course_id:
+          type: integer
+paths:
+  /language_courses:
+    get:
+      summary: Tüm dil kurslarını listele
+      tags: [Courses]
+      responses:
+        '200':
+          description: Başarılı
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LanguageCourse'
+    post:
+      summary: Yeni kurs oluştur
+      tags: [Courses]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LanguageCourse'
+      responses:
+        '201':
+          description: Kurs oluşturuldu
+
+  /language_courses/{id}:
+    get:
+      summary: Tek bir kursu getir
+      tags: [Courses]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Kurs detayları
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageCourse'
+
+  /units:
+    get:
+      summary: Üniteleri listele
+      tags: [Units]
+      responses:
+        '200':
+          description: Başarılı
+
+  /lessons:
+    get:
+      summary: Dersleri listele (Video/Ses)
+      tags: [Lessons]
+      responses:
+        '200':
+          description: Başarılı listeleme
