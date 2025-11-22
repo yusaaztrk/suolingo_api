@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+		"name": "Suolingo AI Core API",
+		"description": "Suolingo AI Destekli Dil Öğrenme Platformu için Backend Test Koleksiyonu. (AI Simülasyon, Gamification ve Avatar Yönetimi)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "🤖 AI Simulation & Avatars",
+			"item": [
+				{
+					"name": "1. Avatarları Listele",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/avatars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"avatars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Avatarı Konuştur (TTS)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Hello teacher, can you explain the simple past tense?\",\r\n    \"avatar_id\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/speak",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"speak"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Telaffuz Kontrolü (STT)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/check_pronunciation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"check_pronunciation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Konuşma Geçmişi (Session History)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/history?avatar_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"history"
+							],
+							"query": [
+								{
+									"key": "avatar_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🏆 Gamification",
+			"item": [
+				{
+					"name": "Profil Bilgileri (XP & Level)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liderlik Tablosu (Leaderboard)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/leaderboard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"leaderboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Günlük Görevler (Daily Quests)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/daily_quests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"daily_quests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📚 Standard Curriculum",
+			"item": [
+				{
+					"name": "Tüm Kurslar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/language_courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"language_courses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
