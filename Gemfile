@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem "rails", "~> 7.2.2"
 
 # Windows'ta sorunsuz calisan veritabani surucusu
-gem "sqlite3", "~> 1.7"
+gem "sqlite3", "~> 2.8"
 
 # Windows saat dilimi fixi
 gem "tzinfo-data", platforms: %i[ windows jruby ]
